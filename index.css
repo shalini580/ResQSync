@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dust-grey: #dad6d6;
+  --color-dust-grey-50: #faf9f9;
+  --color-dust-grey-100: #f4f3f3;
+  --color-dust-grey-200: #dad6d6;
+  --color-dust-grey-300: #c2bcbc;
+  --color-dust-grey-400: #a39b9b;
+  --color-dust-grey-500: #7e7575;
+  --color-dust-grey-600: #5e5656;
+  --color-dust-grey-700: #423c3c;
+  --color-dust-grey-800: #2a2626;
+  --color-dust-grey-900: #171515;
+  --color-dust-grey-950: #0f0d0d;
+
+  --color-muted-teal: #92bfb1;
+  --color-muted-teal-50: #f2f8f6;
+  --color-muted-teal-100: #e2f0ec;
+  --color-muted-teal-200: #c5e1d9;
+  --color-muted-teal-300: #a8d2c5;
+  --color-muted-teal-400: #92bfb1;
+  --color-muted-teal-500: #6fa595;
+  --color-muted-teal-600: #548b7b;
+  --color-muted-teal-700: #3d6b5e;
+  --color-muted-teal-800: #2a4c42;
+  --color-muted-teal-900: #182e28;
+  --color-muted-teal-950: #0c1815;
+
+  --color-honey-bronze: #f4ac45;
+  --color-honey-bronze-50: #fef8f0;
+  --color-honey-bronze-100: #fdf0dc;
+  --color-honey-bronze-200: #fae0b8;
+  --color-honey-bronze-300: #f7cb8b;
+  --color-honey-bronze-400: #f4ac45;
+  --color-honey-bronze-500: #e59323;
+  --color-honey-bronze-600: #bf7411;
+  --color-honey-bronze-700: #93540b;
+  --color-honey-bronze-800: #673907;
+  --color-honey-bronze-900: #3d2103;
+  --color-honey-bronze-950: #241301;
+
+  --color-coffee-bean: #694a38;
+  --color-coffee-bean-50: #f9f6f4;
+  --color-coffee-bean-100: #f0eae5;
+  --color-coffee-bean-200: #decbc2;
+  --color-coffee-bean-300: #bda497;
+  --color-coffee-bean-400: #8f6f5d;
+  --color-coffee-bean-500: #694a38;
+  --color-coffee-bean-600: #543b2c;
+  --color-coffee-bean-700: #402c21;
+  --color-coffee-bean-800: #2d1e16;
+  --color-coffee-bean-900: #1a110c;
+  --color-coffee-bean-950: #0e0906;
+
+  --color-cherry-rose: #a61c3c;
+  --color-cherry-rose-50: #fdf2f4;
+  --color-cherry-rose-100: #fbe1e6;
+  --color-cherry-rose-200: #f6bdc8;
+  --color-cherry-rose-300: #ef8ba0;
+  --color-cherry-rose-400: #e45272;
+  --color-cherry-rose-500: #a61c3c;
+  --color-cherry-rose-600: #8a132f;
+  --color-cherry-rose-700: #6c0d23;
+  --color-cherry-rose-800: #4d0818;
+  --color-cherry-rose-900: #2e040e;
+  --color-cherry-rose-950: #1c0208;
+}
