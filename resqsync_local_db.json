@@ -1,0 +1,67 @@
+{
+  "lastUpdated": "2026-10-07T08:48:00.000Z",
+  "storageType": "Local Database File (Persistent Storage)",
+  "users": [
+    { "id": "u_admin", "email": "admin@gmail.com", "password": "admin123", "role": "admin", "name": "Chief Controller Marcus Vance", "phone": "+1 555-0101", "zone": "Zone A" },
+    { "id": "u_rest", "email": "marcus@gmail.com", "password": "password123", "role": "restaurant", "name": "Marcus Delano (Metro Kitchen)", "phone": "+1 555-0102", "zone": "Zone A" },
+    { "id": "u_ngo", "email": "shantingo@gmail.com", "password": "password123", "role": "ngo", "name": "Shanti Shelter Coordinator", "phone": "+1 555-0103", "zone": "Zone B" },
+    { "id": "u_vol", "email": "alex@gmail.com", "password": "password123", "role": "volunteer", "name": "Alex Rivera (First Responder)", "phone": "+1 555-0104", "zone": "Zone A" }
+  ],
+  "emergency_cases": [
+    { "id": "em_1", "process_id": "PID-101", "title": "Flash Flood River Overflow at Sector 4", "type": "flood", "priority": "P1 - Critical", "priority_score": 1, "zone": "Zone A", "location": "North Riverside Crossing", "status": "in_progress", "required_food": 60, "required_water": 80, "required_medicine": 25, "required_vehicles": 4, "required_volunteers": 8, "arrival_time": "10:14 AM", "burst_time": 60, "reported_by": "Civil Defense Beacon" },
+    { "id": "em_2", "process_id": "PID-102", "title": "Commercial Kitchen Chemical Fire", "type": "fire", "priority": "P1 - Critical", "priority_score": 1, "zone": "Zone B", "location": "Market Street Block 12", "status": "in_progress", "required_food": 20, "required_water": 40, "required_medicine": 30, "required_vehicles": 3, "required_volunteers": 6, "arrival_time": "10:28 AM", "burst_time": 45, "reported_by": "Emergency 911 Dispatch" },
+    { "id": "em_3", "process_id": "PID-103", "title": "Apartment Building Structural Tremor Damage", "type": "earthquake", "priority": "P2 - High", "priority_score": 2, "zone": "Zone C", "location": "Highland Ridge Complex", "status": "allocated", "required_food": 50, "required_water": 60, "required_medicine": 20, "required_vehicles": 2, "required_volunteers": 5, "arrival_time": "10:45 AM", "burst_time": 50, "reported_by": "Municipal Structural Sensor" },
+    { "id": "em_4", "process_id": "PID-104", "title": "Mass Heatstroke at Central Relief Center", "type": "medical", "priority": "P1 - Critical", "priority_score": 1, "zone": "Zone A", "location": "Central Plaza Shelter", "status": "pending", "required_food": 30, "required_water": 70, "required_medicine": 40, "required_vehicles": 2, "required_volunteers": 7, "arrival_time": "11:05 AM", "burst_time": 35, "reported_by": "Shelter Medical Officer" },
+    { "id": "em_5", "process_id": "PID-105", "title": "Secondary Supply Shortage at East Camp", "type": "other", "priority": "P3 - Medium", "priority_score": 3, "zone": "Zone D", "location": "East District High School", "status": "pending", "required_food": 40, "required_water": 50, "required_medicine": 10, "required_vehicles": 1, "required_volunteers": 3, "arrival_time": "11:20 AM", "burst_time": 25, "reported_by": "Zone D Relief Volunteers" }
+  ],
+  "resources": [
+    { "id": "res_a_food", "zone": "Zone A", "resource_type": "food", "total_capacity": 500, "available_units": 320, "allocated_units": 180, "unit_name": "Ration Meals" },
+    { "id": "res_a_water", "zone": "Zone A", "resource_type": "water", "total_capacity": 600, "available_units": 450, "allocated_units": 150, "unit_name": "Potable Crates (20L)" },
+    { "id": "res_a_med", "zone": "Zone A", "resource_type": "medicine", "total_capacity": 200, "available_units": 140, "allocated_units": 60, "unit_name": "Trauma Kits" },
+    { "id": "res_a_veh", "zone": "Zone A", "resource_type": "vehicles", "total_capacity": 25, "available_units": 18, "allocated_units": 7, "unit_name": "Rescue Vans" },
+    { "id": "res_a_cot", "zone": "Zone A", "resource_type": "cots", "total_capacity": 300, "available_units": 220, "allocated_units": 80, "unit_name": "Emergency Cots" },
+
+    { "id": "res_b_food", "zone": "Zone B", "resource_type": "food", "total_capacity": 400, "available_units": 260, "allocated_units": 140, "unit_name": "Ration Meals" },
+    { "id": "res_b_water", "zone": "Zone B", "resource_type": "water", "total_capacity": 500, "available_units": 310, "allocated_units": 190, "unit_name": "Potable Crates (20L)" },
+    { "id": "res_b_med", "zone": "Zone B", "resource_type": "medicine", "total_capacity": 150, "available_units": 95, "allocated_units": 55, "unit_name": "Trauma Kits" },
+    { "id": "res_b_veh", "zone": "Zone B", "resource_type": "vehicles", "total_capacity": 20, "available_units": 12, "allocated_units": 8, "unit_name": "Rescue Vans" },
+    { "id": "res_b_cot", "zone": "Zone B", "resource_type": "cots", "total_capacity": 250, "available_units": 175, "allocated_units": 75, "unit_name": "Emergency Cots" },
+
+    { "id": "res_c_food", "zone": "Zone C", "resource_type": "food", "total_capacity": 350, "available_units": 200, "allocated_units": 150, "unit_name": "Ration Meals" },
+    { "id": "res_c_water", "zone": "Zone C", "resource_type": "water", "total_capacity": 450, "available_units": 290, "allocated_units": 160, "unit_name": "Potable Crates (20L)" },
+    { "id": "res_c_med", "zone": "Zone C", "resource_type": "medicine", "total_capacity": 180, "available_units": 120, "allocated_units": 60, "unit_name": "Trauma Kits" },
+    { "id": "res_c_veh", "zone": "Zone C", "resource_type": "vehicles", "total_capacity": 15, "available_units": 9, "allocated_units": 6, "unit_name": "Rescue Vans" },
+    { "id": "res_c_cot", "zone": "Zone C", "resource_type": "cots", "total_capacity": 200, "available_units": 130, "allocated_units": 70, "unit_name": "Emergency Cots" },
+
+    { "id": "res_d_food", "zone": "Zone D", "resource_type": "food", "total_capacity": 300, "available_units": 180, "allocated_units": 120, "unit_name": "Ration Meals" },
+    { "id": "res_d_water", "zone": "Zone D", "resource_type": "water", "total_capacity": 400, "available_units": 230, "allocated_units": 170, "unit_name": "Potable Crates (20L)" },
+    { "id": "res_d_med", "zone": "Zone D", "resource_type": "medicine", "total_capacity": 120, "available_units": 75, "allocated_units": 45, "unit_name": "Trauma Kits" },
+    { "id": "res_d_veh", "zone": "Zone D", "resource_type": "vehicles", "total_capacity": 12, "available_units": 8, "allocated_units": 4, "unit_name": "Rescue Vans" },
+    { "id": "res_d_cot", "zone": "Zone D", "resource_type": "cots", "total_capacity": 150, "available_units": 95, "allocated_units": 55, "unit_name": "Emergency Cots" }
+  ],
+  "surplus_food": [
+    { "id": "food_1", "restaurant_id": "u_rest", "restaurant_name": "Metro Central Kitchen", "title": "Nutritious Steamed Rice & Lentil Stew", "quantity_servings": 75, "food_type": "Fresh Cooked Meals", "zone": "Zone A", "preparation_time": "09:30 AM", "expiry_time": "02:00 PM", "pickup_window": "11:00 AM - 01:00 PM", "status": "available" },
+    { "id": "food_2", "restaurant_id": "u_rest", "restaurant_name": "Grand Plaza Buffet", "title": "Artisan Bread Rolls & Vegetable Medley", "quantity_servings": 110, "food_type": "Baked & Produce", "zone": "Zone B", "preparation_time": "08:45 AM", "expiry_time": "03:30 PM", "pickup_window": "11:30 AM - 01:30 PM", "status": "reserved" },
+    { "id": "food_3", "restaurant_id": "u_rest", "restaurant_name": "Green Garden Bistro", "title": "Packed Protein Sandwiches & Clean Juices", "quantity_servings": 60, "food_type": "Packaged Lunch", "zone": "Zone A", "preparation_time": "10:00 AM", "expiry_time": "04:00 PM", "pickup_window": "12:00 PM - 02:00 PM", "status": "available" }
+  ],
+  "rescue_missions": [
+    { "id": "ms_1", "emergency_id": "em_1", "volunteer_id": "u_vol", "volunteer_name": "Alex Rivera", "title": "Urgent Flood Evacuation & Potable Water Delivery", "status": "in_transit", "priority": "P1 - Critical", "pickup_location": "Central Depot A", "delivery_location": "North Riverside Crossing", "zone": "Zone A", "eta_minutes": 12, "allocated_food": 60, "allocated_water": 80, "allocated_medicine": 25, "allocated_vehicles": 2 },
+    { "id": "ms_2", "emergency_id": "em_2", "volunteer_id": null, "volunteer_name": null, "title": "Medical Trauma Kit Deployment to Sector 12 Fire", "status": "assigned", "priority": "P1 - Critical", "pickup_location": "Hospital Warehouse B", "delivery_location": "Market Street Block 12", "zone": "Zone B", "eta_minutes": 18, "allocated_food": 0, "allocated_water": 40, "allocated_medicine": 30, "allocated_vehicles": 1 }
+  ],
+  "volunteers": [
+    { "id": "vol_1", "user_id": "u_vol", "name": "Alex Rivera", "email": "alex@gmail.com", "phone": "+1 555-0104", "zone": "Zone A", "skills": "EMT Certified, Water Rescue, Van Driver", "availability": "Busy", "active_mission_id": "ms_1", "xp": 480, "coins": 120, "badge": "Silver Vanguard", "completed_missions_count": 14 }
+  ],
+  "organisations": [
+    { "id": "org_1", "user_id": "u_ngo", "org_name": "Shanti Emergency Relief Shelter", "org_type": "Emergency Shelter", "zone": "Zone B", "address": "452 Relief Way, Zone B", "contact_person": "Shanti Sharma", "contact_phone": "+1 555-0103", "capacity": 150, "current_occupancy": 94, "status": "verified" },
+    { "id": "org_2", "user_id": "u_rest", "org_name": "Metro Central Kitchen", "org_type": "Restaurant", "zone": "Zone A", "address": "12 Commercial Blvd, Zone A", "contact_person": "Marcus Delano", "contact_phone": "+1 555-0102", "capacity": 300, "current_occupancy": 0, "status": "verified" }
+  ],
+  "resource_requests": [
+    { "id": "req_1", "ngo_id": "org_1", "ngo_name": "Shanti Emergency Relief Shelter", "zone": "Zone B", "requested_food": 80, "requested_water": 120, "requested_medicine": 15, "requested_cots": 25, "priority": "P2 - High", "status": "approved", "notes": "Shelter occupancy surged due to river flooding." }
+  ],
+  "system_notifications": [
+    { "id": "nt_1", "type": "critical", "title": "Flood Alarm in Zone A", "message": "Water level crossed safety barrier at Sector 4. Priority 1 triage active.", "recipient_role": "all", "is_read": false, "created_at": "2026-10-07T10:14:00.000Z" }
+  ],
+  "audit_logs": [
+    { "id": 1, "action": "LOCAL_DATABASE_INITIALIZED", "entity_type": "DATABASE", "entity_id": "LOCAL-0", "actor": "SYSTEM", "details": "Local database file storage initialized for ResQSync", "os_concept": "File I/O Persistence", "dbms_concept": "Local Relational Storage", "created_at": "2026-10-07T08:48:00.000Z" }
+  ]
+}

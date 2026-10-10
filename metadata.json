@@ -1,0 +1,6 @@
+{
+  "name": "ResQSync — Intelligent Emergency Relief & Resource Coordination System",
+  "description": "Civic emergency relief & resource coordination platform simulating real-time OS scheduling, Banker's algorithm resource allocation, concurrency mutex synchronization, and DBMS transactions across City Controller, Restaurants, NGOs, and Volunteers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

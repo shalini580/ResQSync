@@ -1,50 +1,21 @@
-# ResQSync
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-ResQSync is a web-based emergency response coordination platform designed to
-connect different participants involved in emergency situations.
+# Run and deploy your AI Studio app
 
-The platform provides separate interfaces for administrators, NGOs,
-restaurants, and volunteers to coordinate resources, requests, and missions
-within a simulated city environment.
+This contains everything you need to run your app locally.
 
-# Features
+View your app in AI Studio: https://ai.studio/apps/3dd7a3bf-3d14-4c59-9dea-f3aa70883b1a
 
-- Role-based login and registration
-- Admin dashboard for monitoring emergency activities
-- NGO dashboard for managing resource requests
-- Restaurant dashboard for sharing surplus food
-- Volunteer dashboard for viewing and accepting missions
-- City simulation for visualizing emergency zones and available resources
-- Emergency and resource monitoring
-- Mission assignment and tracking
+## Run Locally
 
-# User Roles
-# Admin
-- Monitor active emergencies
-- View available resources
-- Monitor active missions
-- Track volunteer participation
+**Prerequisites:**  Node.js
 
-# NGO
-- View pending resource requests
-- Track received resources
-- Create resource requests
 
-# Restaurant
-- Manage available surplus food
-- Track donations
-- Track rescued food
-
-# Volunteer
-- View available missions
-- Accept assigned missions
-- Track contribution through the dashboard
-
-# Tech Stack
-
-- React.js
-- Vite
-- Tailwind CSS
-- React Router
-- JavaScript 
-
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+4. Type `o` and press Enter in the terminal to open the local app in your browser.
