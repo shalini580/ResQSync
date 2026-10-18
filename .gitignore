@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+data/
+c_engine/resqsync_kernel
+c_engine/*.o
+.DS_Store
