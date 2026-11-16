@@ -1,111 +1,126 @@
-# ResQSync – Resource Coordination & Emergency Relief System
 
-OS + DBMS PBL project, team **Avengers (T167)**, GEU.
+# ResQSync – Intelligent Emergency Relief & Resource Coordination System
 
-Emergency cases and NGO requests are treated like **processes**. They wait in a priority ready queue, worker threads allocate stock from four city zones, and every allocation runs as one **ACID transaction** with **triggers** keeping the data honest. The OS side also has a real **C kernel** (pthreads, fork, pipes) for scheduling, mutex, semaphore, IPC, Banker's algorithm and deadlock.
+**ResQSync** is a simulation-based city management platform designed to coordinate emergency response, resource allocation, food donations, and volunteer rescue operations.
 
-Every variable and function starts with `res` (from **Res**QSync).
+The platform connects restaurants, NGOs, shelters, volunteers, and administrators to reduce food wastage and improve resource distribution during emergencies.
 
----
+Developed as an **Operating Systems and DBMS Project** at Graphic Era University (GEU).
 
-## Run it on a Mac
+## Key Features
 
-You need **Node.js 22.13 or newer** (`node -v`).
+- **Role-Based Access:** Separate dashboards for Admin, NGO, Restaurant, and Volunteer.
+- **Emergency Management:** Create, monitor, and prioritize emergency cases.
+- **Resource Allocation:** Allocate food, water, medicines, and other resources based on priority and availability.
+- **Food Donation Management:** Connect restaurants with NGOs and shelters to manage surplus food.
+- **Rescue Missions:** Assign volunteers, track mission progress, and manage deliveries.
+- **OS Simulation:** Demonstrate CPU scheduling, multithreading, synchronization, IPC, deadlock handling, and Banker's Algorithm.
+- **Database Management:** Implement transactions, ACID properties, concurrency control, locks, triggers, views, and stored procedures.
+- **Gamification:** Reward volunteers with XP, coins, levels, badges, and leaderboards.
+- **Analytics:** Monitor resource usage, rescue activities, volunteer performance, and City Health Score.
+
+## Technology Stack
+
+| Component | Technology |
+|---|---|
+| Frontend | React.js, Tailwind CSS |
+| Backend | Node.js, Express.js |
+| Database | MySQL / SQLite |
+| OS Engine | C, Pthreads |
+| Authentication | JWT, Bcrypt |
+| Inter-Process Communication | Fork, Pipes |
+
+## Operating System Concepts
+
+ResQSync integrates practical OS concepts into its resource coordination workflow:
+
+- Process Management and PCB
+- CPU Scheduling (FCFS, SJF, SRTF, Priority, Round Robin)
+- Multithreading using Pthreads
+- Mutex and Semaphore
+- Process Synchronization
+- Inter-Process Communication (IPC)
+- Deadlock Detection and Recovery
+- Banker's Algorithm
+- Resource Allocation
+
+## DBMS Concepts
+
+- ER Modeling and Relational Database Design
+- SQL and Normalization
+- Primary Keys, Foreign Keys, and Constraints
+- ACID Transactions
+- Concurrency Control and Row Locking
+- Database Triggers
+- Stored Procedures
+- Views and Indexing
+- Audit Logs and Recovery
+
+## Project Structure
+
+```text
+resqsync/
+├── c_engine/       # C-based OS simulation
+├── database/       # MySQL and SQLite schemas
+├── server/         # Backend APIs and resource allocator
+├── src/            # React frontend
+├── scripts/        # Database utilities
+├── tests/          # Synchronization tests
+├── server.js       # Application entry point
+└── package.json
+```
+
+## Installation and Setup
+
+### Prerequisites
+- Node.js 22.13+
+- npm
+- C compiler (GCC/Clang)
+- MySQL (optional; SQLite fallback supported)
+
+### Steps
 
 ```bash
+git clone <repository-url>
 cd resqsync
 npm install
 npm run dev
 ```
 
-Open **http://localhost:3000**.
+Open the application at:
 
-| Login | Email | Password |
-|---|---|---|
-| City controller (admin) | admin@gmail.com | admin123 |
-| NGO | shantingo@gmail.com | password123 |
-| Restaurant | marcus@gmail.com | password123 |
-| Volunteer | alex@gmail.com | password123 |
-
-### The database: MySQL or SQLite
-
-The app tries **MySQL first**. If MySQL isn't running or the password is wrong, it prints
-
-```
-[db] MySQL not available (ER_ACCESS_DENIED_ERROR) - using SQLite instead
+```text
+http://localhost:3000
 ```
 
-and uses the file `data/resqsync.db` inside the project. Nothing else needs to be set up.
+### Database Configuration
 
-To use MySQL, copy `.env.example` to `.env` and fill in your password:
+ResQSync supports MySQL and SQLite.
+
+- MySQL is used when the database connection is configured.
+- SQLite is used as a fallback when MySQL is unavailable.
+- Set `DB_ENGINE=sqlite` in `.env` to use SQLite directly.
+
+## Testing
+
+Run synchronization tests:
 
 ```bash
-cp .env.example .env
-# open .env and set DB_PASSWORD=your_mysql_password
+npm run test:sync
 ```
 
-The database `resqsync_final` with all its tables, views, triggers and procedures is created automatically.
-Set `DB_ENGINE=sqlite` in `.env` to skip MySQL completely.
-
-### The C kernel
-
-The server compiles `c_engine/` with `cc` when it starts. If the Mac has no compiler, run this once and restart:
+View database records:
 
 ```bash
-xcode-select --install
+npm run db
 ```
 
-You can also build it by hand with `npm run kernel`.
+## Team Information
 
-### Other commands
+**Team Name:** Avengers  
+**Team ID:** OSDBMS-V-2026-T167  
+**Institution:** Graphic Era University
 
-```bash
-npm run db                 # print every table in the terminal
-npm run db audit_logs      # one table, all rows
-npm run test:sync          # 18 automatic checks (keep "npm run dev" running in another terminal)
-```
+## Project Scope
 
-To view the SQLite file in VS Code, install the recommended **SQLite Viewer** extension and click `data/resqsync.db`.
-
----
-
-## Where each report feature lives
-
-| Report feature | Code |
-|---|---|
-| Process synchronization: bounded ready queue, semaphores, mutex, condition variable | `server/resSync.js`, `server/resAllocator.js` |
-| Priority scheduling with aging and tie-break (priority → arrival → id) | `server/resAllocator.js` (`resCompareRows`) |
-| Producer–consumer workers, "Allocate by priority" button | `server/resAllocator.js`, Sync monitor page |
-| CPU scheduling FCFS / SJF / SRTF / Priority / RR | `c_engine/cpu_scheduler.c`, OS lab → CPU scheduling |
-| Mutex race demo (pthreads) | `c_engine/synchronization.c`, OS lab → Mutex |
-| Semaphore producer–consumer | `c_engine/synchronization.c`, OS lab → Semaphore |
-| IPC with fork + pipe | `c_engine/ipc_pipe.c`, OS lab → IPC pipes |
-| Banker's algorithm (live zone data too) | `c_engine/bankers_algorithm.c`, OS lab → Banker's |
-| Deadlock detection and recovery | `c_engine/deadlock.c`, OS lab → Deadlock |
-| PCB / process table | `c_engine/pcb.c`, OS lab → Process table |
-| 10 tables, keys, constraints | `database/schema.mysql.sql`, `database/schema.sqlite.sql` |
-| 4 views | `v_priority_queue`, `v_zone_stock`, `v_volunteer_leaderboard`, `v_mission_board` |
-| 7 triggers (underflow, audit, surplus alert, case audit, fulfilled ×2, rewards) | schema files, DBMS lab → Triggers |
-| Stored procedures `sp_AllocateEmergencyResources`, `sp_DispatchRescueMission` | `schema.mysql.sql` (SQLite runs the same steps in `server/resDb.js`) |
-| ACID transactions, rollback test, stock ledger | `server/resDb.js`, DBMS lab → Transactions |
-| Row locking (`SELECT … FOR UPDATE`) and race test | DBMS lab → Concurrency |
-| No duplicate open requests | unique `open_key` column / partial unique index |
-| Organisation verification | Organisations page, `/api/organisations` |
-| Rescue missions with stages, XP, coins, badges | Rescue missions + Rewards pages |
-| Surplus food pickup tracking | Surplus food page |
-| Notifications, audit log | bell in the top bar, Audit log page |
-| City map, analytics, City Health Score | City map + Analytics pages |
-| JWT login, bcrypt passwords | `server/resAuth.js` |
-
-## Folder layout
-
-```
-resqsync/
-├── server.js              starts DB → seed → C kernel → allocator → web server
-├── server/                Express API, database layer, allocator, sync primitives
-├── src/                   React frontend (views/ = pages, components/ = shared parts)
-├── c_engine/              C kernel (make → resqsync_kernel)
-├── database/              MySQL and SQLite schema
-├── scripts/resShowDb.js   npm run db
-└── tests/resSync.test.js  npm run test:sync
-```
+ResQSync is an academic simulation platform. City locations, emergencies, users, resources, and rescue activities are simulated. It is not intended to replace real-world emergency response services.
