@@ -8,20 +8,20 @@ const resMinutesAgo = (resMin) => resSqlTime(new Date(Date.now() - resMin * 6000
 const resHoursLater = (resH) => resSqlTime(new Date(Date.now() + resH * 3600000));
 
 const RES_USERS = [
-  { name: 'City Controller', email: 'admin@gmail.com', password: 'admin123', role: 'admin', zone: 'Zone A' },
-  { name: 'Shanti Sharma', email: 'shantingo@gmail.com', password: 'password123', role: 'ngo', zone: 'Zone B',
+  { name: 'City Controller', email: 'admin@resqsync.test', role: 'admin', zone: 'Zone A' },
+  { name: 'Shanti Sharma', email: 'seed1@resqsync.test', role: 'ngo', zone: 'Zone B',
     org: ['Shanti Emergency Relief Shelter', 'Emergency Shelter', '452 Relief Way, Zone B', 150, 'verified'] },
-  { name: 'Ravi Kumar', email: 'hope@gmail.com', password: 'password123', role: 'ngo', zone: 'Zone A',
+  { name: 'Ravi Kumar', email: 'seed2@resqsync.test', role: 'ngo', zone: 'Zone A',
     org: ['Hope Relief NGO', 'NGO', '18 Ganga Road, Zone A', 200, 'verified'] },
-  { name: 'Meena Joshi', email: 'seva@gmail.com', password: 'password123', role: 'ngo', zone: 'Zone C',
+  { name: 'Meena Joshi', email: 'seed3@resqsync.test', role: 'ngo', zone: 'Zone C',
     org: ['Seva Community Kitchen', 'Community Kitchen', '7 Hill View, Zone C', 120, 'pending'] },
-  { name: 'Marcus Delano', email: 'marcus@gmail.com', password: 'password123', role: 'restaurant', zone: 'Zone A',
+  { name: 'Marcus Delano', email: 'seed4@resqsync.test', role: 'restaurant', zone: 'Zone A',
     org: ['Metro Central Kitchen', 'Restaurant', '12 Commercial Blvd, Zone A', 300, 'verified'] },
-  { name: 'Anita Rawat', email: 'greenbistro@gmail.com', password: 'password123', role: 'restaurant', zone: 'Zone B',
+  { name: 'Anita Rawat', email: 'seed5@resqsync.test', role: 'restaurant', zone: 'Zone B',
     org: ['Green Garden Bistro', 'Restaurant', '3 Lake Side, Zone B', 80, 'pending'] },
-  { name: 'Alex Rivera', email: 'alex@gmail.com', password: 'password123', role: 'volunteer', zone: 'Zone A',
+  { name: 'Alex Rivera', email: 'seed6@resqsync.test', role: 'volunteer', zone: 'Zone A',
     vol: ['EMT certified, water rescue, van driver', 480, 120, 'Silver Vanguard', 14] },
-  { name: 'Priya Negi', email: 'priya@gmail.com', password: 'password123', role: 'volunteer', zone: 'Zone B',
+  { name: 'Priya Negi', email: 'seed7@resqsync.test', role: 'volunteer', zone: 'Zone B',
     vol: ['First aid, logistics', 120, 40, 'Bronze Responder', 3] },
 ];
 
@@ -36,11 +36,13 @@ const RES_STOCK = {
 export async function resSeed() {
   const resCount = await resOne('SELECT COUNT(*) AS n FROM users');
   if (Number(resCount.n) > 0) return;
+  const resDemoPassword = process.env.RESQSYNC_DEMO_PASSWORD;
+  if (!resDemoPassword) throw new Error('RESQSYNC_DEMO_PASSWORD must be set before seeding demo users');
   console.log('[db] Empty database - adding demo data');
 
   const resIds = {};
   for (const resU of RES_USERS) {
-    const resHash = await bcrypt.hash(resU.password, 10);
+    const resHash = await bcrypt.hash(resDemoPassword, 10);
     const resIns = await resQuery(
       'INSERT INTO users (name, email, password_hash, role, zone, phone) VALUES (?,?,?,?,?,?)',
       [resU.name, resU.email, resHash, resU.role, resU.zone, '+91 98' + String(10000000 + resNextPhone()).slice(0, 8)]
@@ -71,7 +73,7 @@ export async function resSeed() {
     }
   }
 
-  const resAdmin = resIds['admin@gmail.com'];
+  const resAdmin = resIds['admin@resqsync.test'];
   // same cases as the original project; arrival gaps give nice numbers in the scheduling lab
   const resCases = [
     [66, { title: 'Flash flood river overflow at Sector 4', case_type: 'flood', priority: 1, zone: 'Zone A', location: 'North Riverside Crossing', loc_x: 2.4, loc_y: 8.6, people_affected: 180, food: 60, water: 80, medicine: 25, cots: 20, vehicles: 4, burst_time: 60 }],
@@ -84,10 +86,10 @@ export async function resSeed() {
     await resCreateCase({ ...resCase, reported_by: resAdmin }, resMinutesAgo(resAgo));
   }
 
-  await resCreateRequest({ ngo_id: resIds['shantingo@gmail.com'], title: 'Night shelter for displaced families', zone: 'Zone B', priority: 2, loc_x: 12.3, loc_y: 8.1, people_affected: 150, food: 60, water: 50, medicine: 10, cots: 45 }, resMinutesAgo(40));
-  await resCreateRequest({ ngo_id: resIds['hope@gmail.com'], title: 'Medicines for Riverside camp', zone: 'Zone A', priority: 2, loc_x: 7.9, loc_y: 2.4, people_affected: 60, water: 40, medicine: 30 }, resMinutesAgo(20));
+  await resCreateRequest({ ngo_id: resIds['seed1@resqsync.test'], title: 'Night shelter for displaced families', zone: 'Zone B', priority: 2, loc_x: 12.3, loc_y: 8.1, people_affected: 150, food: 60, water: 50, medicine: 10, cots: 45 }, resMinutesAgo(40));
+  await resCreateRequest({ ngo_id: resIds['seed2@resqsync.test'], title: 'Medicines for Riverside camp', zone: 'Zone A', priority: 2, loc_x: 7.9, loc_y: 2.4, people_affected: 60, water: 40, medicine: 30 }, resMinutesAgo(20));
 
-  const resRest = resIds['marcus@gmail.com'];
+  const resRest = resIds['seed4@resqsync.test'];
   await resQuery(
     'INSERT INTO surplus_food (restaurant_id, title, food_type, servings, zone, expiry_time) VALUES (?,?,?,?,?,?)',
     [resRest, 'Steamed rice and dal', 'Cooked meals', 75, 'Zone A', resHoursLater(4)]

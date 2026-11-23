@@ -1,13 +1,6 @@
 import { useState } from 'react';
 import { resApi, RES_ZONES } from '../resApi.jsx';
 
-const RES_DEMO = [
-  ['City controller', 'admin@gmail.com', 'admin123'],
-  ['NGO / shelter', 'shantingo@gmail.com', 'password123'],
-  ['Restaurant', 'marcus@gmail.com', 'password123'],
-  ['Volunteer', 'alex@gmail.com', 'password123'],
-];
-
 export default function ResLogin({ onSignedIn: resOnSignedIn }) {
   const [resMode, resSetMode] = useState('login');
   const [resF, resSetF] = useState({
@@ -17,13 +10,13 @@ export default function ResLogin({ onSignedIn: resOnSignedIn }) {
   const [resBusy, resSetBusy] = useState(false);
   const resSet = (resK) => (resE) => resSetF({ ...resF, [resK]: resE.target.value });
 
-  async function resSubmit(resE, resQuick) {
+  async function resSubmit(resE) {
     resE?.preventDefault();
     resSetBusy(true);
     resSetError('');
     try {
-      const resLogin = resQuick || resMode === 'login';
-      const resBody = resQuick || (resLogin ? { email: resF.email, password: resF.password } : resF);
+      const resLogin = resMode === 'login';
+      const resBody = resLogin ? { email: resF.email, password: resF.password } : resF;
       const { token: resToken, user: resUser } = await resApi(resLogin ? '/auth/login' : '/auth/register', { method: 'POST', body: resBody });
       resOnSignedIn(resToken, resUser);
     } catch (resErr) {
@@ -41,15 +34,7 @@ export default function ResLogin({ onSignedIn: resOnSignedIn }) {
           Emergency relief for a simulated city. Cases are scheduled like processes, every zone's stock is guarded by a lock,
           and each allocation is one database transaction.
         </p>
-        <div className="demo">
-          <h2>Try a demo account</h2>
-          {RES_DEMO.map(([resRole, resEmail, resPassword]) => (
-            <button key={resEmail} className="demo-row" disabled={resBusy} onClick={() => resSubmit(null, { email: resEmail, password: resPassword })}>
-              <span>{resRole}</span>
-              <span className="muted">{resEmail}</span>
-            </button>
-          ))}
-        </div>
+        <div className="demo"><p>Sign in with your configured account or create an account.</p></div>
       </section>
 
       <form className="login-card" onSubmit={resSubmit}>
