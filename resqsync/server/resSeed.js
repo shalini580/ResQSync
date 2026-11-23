@@ -8,7 +8,7 @@ const resMinutesAgo = (resMin) => resSqlTime(new Date(Date.now() - resMin * 6000
 const resHoursLater = (resH) => resSqlTime(new Date(Date.now() + resH * 3600000));
 
 const RES_USERS = [
-  { name: 'City Controller', email: 'admin@resqsync.test', role: 'admin', zone: 'Zone A' },
+  { name: 'admin', email: 'admin@gmail.com', role: 'admin', zone: 'Zone A' },
   { name: 'Shanti Sharma', email: 'seed1@resqsync.test', role: 'ngo', zone: 'Zone B',
     org: ['Shanti Emergency Relief Shelter', 'Emergency Shelter', '452 Relief Way, Zone B', 150, 'verified'] },
   { name: 'Ravi Kumar', email: 'seed2@resqsync.test', role: 'ngo', zone: 'Zone A',
@@ -34,10 +34,21 @@ const RES_STOCK = {
 };
 
 export async function resSeed() {
-  const resCount = await resOne('SELECT COUNT(*) AS n FROM users');
-  if (Number(resCount.n) > 0) return;
   const resDemoPassword = process.env.RESQSYNC_DEMO_PASSWORD;
   if (!resDemoPassword) throw new Error('RESQSYNC_DEMO_PASSWORD must be set before seeding demo users');
+
+  // Migrate the prior demo admin account once, without putting a password in source control.
+  const resLegacyAdmin = await resOne('SELECT id FROM users WHERE email = ?', ['admin@resqsync.test']);
+  if (resLegacyAdmin) {
+    const resAdminHash = await bcrypt.hash(resDemoPassword, 10);
+    await resQuery(
+      'UPDATE users SET name = ?, email = ?, password_hash = ? WHERE id = ?',
+      ['admin', 'admin@gmail.com', resAdminHash, resLegacyAdmin.id]
+    );
+  }
+
+  const resCount = await resOne('SELECT COUNT(*) AS n FROM users');
+  if (Number(resCount.n) > 0) return;
   console.log('[db] Empty database - adding demo data');
 
   const resIds = {};
@@ -73,7 +84,7 @@ export async function resSeed() {
     }
   }
 
-  const resAdmin = resIds['admin@resqsync.test'];
+  const resAdmin = resIds['admin@gmail.com'];
   // same cases as the original project; arrival gaps give nice numbers in the scheduling lab
   const resCases = [
     [66, { title: 'Flash flood river overflow at Sector 4', case_type: 'flood', priority: 1, zone: 'Zone A', location: 'North Riverside Crossing', loc_x: 2.4, loc_y: 8.6, people_affected: 180, food: 60, water: 80, medicine: 25, cots: 20, vehicles: 4, burst_time: 60 }],
