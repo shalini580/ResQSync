@@ -1,5 +1,5 @@
 import { resUseLive, RES_LABEL, RES_PRIORITY } from '../resApi.jsx';
-import { ResPage, ResBars } from '../components/ResShared.jsx';
+import { ResPage, ResBars } from '../ResShared.jsx';
 
 const RES_MISSION_NAME = { open: 'Waiting for volunteer', assigned: 'Assigned', pickup: 'At pickup', in_transit: 'In transit', delivered: 'Delivered', completed: 'Completed' };
 
