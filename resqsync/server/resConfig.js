@@ -13,7 +13,7 @@ const resNum = (resValue, resDefault) => {
 
 export const resConfig = {
   resPort: resInt(process.env.PORT, 3000),
-  resJwtSecret: process.env.JWT_SECRET || 'resqsync-dev-secret-change-me',
+  resJwtSecret: process.env.JWT_SECRET || '',
 
   // auto = try MySQL first, fall back to SQLite if it can't connect
   resDbEngine: (process.env.DB_ENGINE || 'auto').toLowerCase(),
